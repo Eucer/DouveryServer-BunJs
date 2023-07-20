@@ -17,6 +17,16 @@ app.get("/", (c) => {
   return c.json({ message: "Hello World!" });
 });
 
+app.get('/api/all-products', async (c) => {
+  try {
+    const products = await Product.find({});
+    console.log(products);
+    c.json(products);
+  } catch (e) {
+    c.json({ error: e.message });
+  }
+});
+
 app.get('/api/products/:dui', async ( ctx: any) => {
   try {
     const { dui } = ctx.params.dui;
